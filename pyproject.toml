@@ -1,0 +1,105 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "claude-ame"
+version = "0.1.0"
+description = "Claude Assistant Manager & Expertiser - Unified management platform for Claude Code assistants"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    { name = "dacineu", email = "you@example.com" }
+]
+keywords = ["claude", "assistant", "manager", "orchestration", "monitoring", "claude-code"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Monitoring",
+]
+dependencies = [
+    "pydantic>=2.0",
+    "sqlalchemy>=2.0",
+    "aiohttp>=3.8",  # for async health checks
+    "click>=8.0",    # CLI framework
+    "rich>=13.0",    # TUI dashboard
+    "claude-mem-mcp",  # placeholder - will use MCP
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+    "bandit>=1.7",
+    "safety>=2.0",
+    "pre-commit>=3.0",
+    "hatch",
+    "hatchling",
+    "mkdocs>=1.5",
+    "mkdocs-material>=9.0",
+    "codecov>=2.0",
+]
+
+[project.scripts]
+claude-ame = "claude_ame.cli:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.ruff]
+target-version = "py39"
+line-length = 88
+select = ["E", "F", "B", "I", "N", "UP", "YTT", "S", "BLE", "FBT", "C4", "DTZ", "T10", "EM", "ICN", "PIE", "PT", "Q", "RSE", "RET", "SIM", "TID", "TCH", "ARG", "PTH", "PD", "PLC", "PLE", "PLR", "PLW", "TRY", "NPY", "AIR", "PERF", "FURB", "LOG", "COM"]
+ignore = []
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = "claude_mem.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--cov=src --cov-report=term --cov-report=html --cov-report=xml"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/migrations/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+]
