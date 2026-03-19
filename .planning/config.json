@@ -1,0 +1,44 @@
+{
+  "project": {
+    "name": "claude-ame",
+    "full_name": "Claude Assistant Manager & Expertiser",
+    "version": "0.1.0",
+    "description": "Comprehensive management system for Claude Code assistants and agents",
+    "author": "dacineu",
+    "license": "MIT",
+    "repository": "local"
+  },
+  "workflow": {
+    "mode": "sequential",
+    "auto_approval": false,
+    "research_depth": "medium",
+    "validation_strictness": "high",
+    "commit_frequency": "milestone"
+  },
+  "gsd": {
+    "phase_structure": "standard",
+    "use_researcher": true,
+    "use_planner": true,
+    "use_implementer": true,
+    "use_verifier": true
+  },
+  "quality": {
+    "min_test_coverage": 80,
+    "require_code_review": true,
+    "security_scan": true,
+    "performance_benchmark": true
+  },
+  "publishing": {
+    "target": "claude-plugin-marketplace",
+    "package_format": "skill",
+    "include_tests": true,
+    "include_docs": true,
+    "signature_required": false
+  },
+  "metadata": {
+    "created": "2026-03-19T10:18:00Z",
+    "tags": ["claude", "assistant", "manager", "orchestration", "monitoring"],
+    "category": "dev-tools",
+    "maturity": "experimental"
+  }
+}
